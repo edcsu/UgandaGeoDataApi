@@ -1,4 +1,6 @@
-﻿namespace UgandaGeoDataApi.Features.Uganda.Models
+﻿using System.Text.Json;
+
+namespace UgandaGeoDataApi.Features.Uganda.Models
 {
     public class Village
     {
@@ -7,5 +9,7 @@
         public string Name { get; set; } = default!;
 
         public string Parish { get; set; } = default!;
+
+        public override string ToString() => JsonSerializer.Serialize(this);
     }
 }

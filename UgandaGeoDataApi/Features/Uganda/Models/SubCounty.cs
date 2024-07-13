@@ -1,4 +1,6 @@
-﻿namespace UgandaGeoDataApi.Features.Uganda.Models
+﻿using System.Text.Json;
+
+namespace UgandaGeoDataApi.Features.Uganda.Models
 {
     public class SubCounty
     {
@@ -7,6 +9,8 @@
         public string Name { get; set; } = default!; 
         
         public string County { get; set; } = default!;
+
+        public override string ToString() => JsonSerializer.Serialize(this);
     }
 
 }
