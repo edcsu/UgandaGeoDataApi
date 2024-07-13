@@ -2,7 +2,7 @@
 
 namespace UgandaGeoDataApi.Features.Uganda.ViewModels
 {
-    public class VillageSearchRequest
+    public class DistrictSearchRequest
     {
         [QueryParam]
         public string? Name { get; set; }
