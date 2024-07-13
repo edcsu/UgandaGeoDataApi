@@ -70,7 +70,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             return JsonSerializer.Deserialize<IEnumerable<Parish>>(json, Options) ?? [];
         }
 
-        public IEnumerable<Village> GetProducts()
+        public IEnumerable<Village> GetVillages()
         {
             using StreamReader streamReader = new(VillagesFileName);
             var json = streamReader.ReadToEnd();

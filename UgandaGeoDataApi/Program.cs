@@ -1,24 +1,33 @@
 using FastEndpoints;
+using FastEndpoints.Swagger;
 using UgandaGeoDataApi.Features.Uganda.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddFastEndpoints();
+builder.Services
+    .AddFastEndpoints()
+    .SwaggerDocument(o =>
+    {
+        o.DocumentSettings = s =>
+        {
+            s.Title = "My API";
+            s.Version = "v1";
+        };
+    });
 
-builder.Services.AddTransient<JsonFileService>();
+builder.Services.AddScoped<JsonFileService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
-app.UseFastEndpoints();
+app.UseFastEndpoints()
+    .UseSwaggerGen();
 
 app.Run();
