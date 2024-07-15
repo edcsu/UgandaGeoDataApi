@@ -5,37 +5,37 @@ using UgandaGeoDataApi.Features.Uganda.ViewModels;
 
 namespace UgandaGeoDataApi.Features.Uganda.Endpoints
 {
-    public class GetVillagesEndpoint : Endpoint<VillageSearchRequest, IEnumerable<VillageViewModel>>
+    public class GetCountiesEndpoint : Endpoint<CountySearchRequest, IEnumerable<CountyViewModel>>
     {
         public required JsonFileService FileService { get; set; }
         
         public override void Configure()
         {
-            Get("/api/villages");
+            Get("/api/counties");
             AllowAnonymous();
             Description(b => b
             .ProducesProblemDetails(400, "application/json+problem") //if using RFC errors 
             .ProducesProblemFE<InternalErrorResponse>(500));
         }
 
-        public override async Task HandleAsync(VillageSearchRequest req, CancellationToken ct)
+        public override async Task HandleAsync(CountySearchRequest req, CancellationToken ct)
         {
-            var villages = FileService.GetVillages();
+            var counties = FileService.GetCounties();
             
-            List<VillageViewModel> viewModels = [];
-            foreach (var village in villages)
+            List<CountyViewModel> viewModels = [];
+            foreach (var County in counties)
             {
-                viewModels.Add(MapFromEntity(village));
+                viewModels.Add(MapFromEntity(County));
             };
 
             await SendAsync(viewModels, cancellation: ct);
         }
 
-        public VillageViewModel MapFromEntity(Village village) => new()
+        public CountyViewModel MapFromEntity(County County) => new()
         {
-            Id = village.Id,
-            Name = village.Name,
-            Parish = village.Parish,
+            Id = County.Id,
+            Name = County.Name,
+            District = County.District,
         };
     }
 }
