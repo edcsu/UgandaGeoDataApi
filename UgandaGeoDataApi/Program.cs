@@ -11,9 +11,10 @@ builder.Services
     {
         o.DocumentSettings = s =>
         {
-            s.Title = "My API";
+            s.Title = "Uganda GeoData API";
             s.Version = "v1";
         };
+        o.AutoTagPathSegmentIndex = 0;
     });
 
 builder.Services.AddScoped<JsonFileService>();

@@ -16,6 +16,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Endpoints
             Description(b => b
             .ProducesProblemDetails(400, "application/json+problem") //if using RFC errors 
             .ProducesProblemFE<InternalErrorResponse>(500));
+            Options(x => x.WithTags("Villages"));
         }
 
         public override async Task HandleAsync(VillageSearchRequest req, CancellationToken ct)
