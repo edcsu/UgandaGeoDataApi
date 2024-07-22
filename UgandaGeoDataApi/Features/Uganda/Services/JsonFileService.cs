@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using UgandaGeoDataApi.Features.Uganda.Models;
+using UgandaGeoDataApi.Features.Uganda.ViewModels;
 
 namespace UgandaGeoDataApi.Features.Uganda.Services
 {
@@ -42,11 +43,19 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             PropertyNameCaseInsensitive = true
         };
 
-        public IEnumerable<District> GetDistricts()
+        public IEnumerable<District> GetDistricts(DistrictSearchRequest districtSearchRequest)
         {
             using StreamReader streamReader = new(DistrictsFileName);
             var json = streamReader.ReadToEnd();
-            return JsonSerializer.Deserialize<IEnumerable<District>>(json, Options) ?? [];
+            var districts = JsonSerializer.Deserialize<IEnumerable<District>>(json, Options) ?? [];
+            if (string.IsNullOrWhiteSpace(districtSearchRequest.Name))
+            {
+                return districts;
+            }
+            else
+            {
+                return districts.Where(it => it.Name.Contains(districtSearchRequest.Name));
+            }
         }
 
         public IEnumerable<County> GetCounties()
