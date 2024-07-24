@@ -21,7 +21,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Endpoints
 
         public override async Task HandleAsync(VillageSearchRequest req, CancellationToken ct)
         {
-            var villages = FileService.GetVillages();
+            var villages = FileService.GetVillages(req);
             
             List<VillageViewModel> viewModels = [];
             foreach (var village in villages)

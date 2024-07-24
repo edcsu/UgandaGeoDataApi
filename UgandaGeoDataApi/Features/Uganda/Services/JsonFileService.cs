@@ -103,11 +103,19 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             }
         }
 
-        public IEnumerable<Village> GetVillages()
+        public IEnumerable<Village> GetVillages(VillageSearchRequest villageSearchRequest)
         {
             using StreamReader streamReader = new(VillagesFileName);
             var json = streamReader.ReadToEnd();
-            return JsonSerializer.Deserialize<IEnumerable<Village>>(json, Options) ?? [];
+            var villages = JsonSerializer.Deserialize<IEnumerable<Village>>(json, Options) ?? [];
+            if (string.IsNullOrWhiteSpace(villageSearchRequest.Name))
+            {
+                return villages;
+            }
+            else
+            {
+                return villages.Where(it => it.Name.Contains(villageSearchRequest.Name));
+            }
         }
     }
 }
