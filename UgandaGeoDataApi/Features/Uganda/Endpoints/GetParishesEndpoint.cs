@@ -21,7 +21,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Endpoints
 
         public override async Task HandleAsync(ParishSearchRequest req, CancellationToken ct)
         {
-            var parishes = FileService.GetParishes();
+            var parishes = FileService.GetParishes(req);
             
             List<ParishViewModel> viewModels = [];
             foreach (var parish in parishes)

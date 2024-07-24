@@ -88,11 +88,19 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             }
         }
 
-        public IEnumerable<Parish> GetParishes()
+        public IEnumerable<Parish> GetParishes(ParishSearchRequest parishSearchRequest)
         {
             using StreamReader streamReader = new(ParishesFileName);
             var json = streamReader.ReadToEnd();
-            return JsonSerializer.Deserialize<IEnumerable<Parish>>(json, Options) ?? [];
+            var parishes = JsonSerializer.Deserialize<IEnumerable<Parish>>(json, Options) ?? [];
+            if (string.IsNullOrWhiteSpace(parishSearchRequest.Name))
+            {
+                return parishes;
+            }
+            else 
+            {
+                return parishes.Where(it => it.Name.Contains(parishSearchRequest.Name));
+            }
         }
 
         public IEnumerable<Village> GetVillages()
