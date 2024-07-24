@@ -21,7 +21,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Endpoints
 
         public override async Task HandleAsync(CountySearchRequest req, CancellationToken ct)
         {
-            var counties = FileService.GetCounties();
+            var counties = FileService.GetCounties(req);
             
             List<CountyViewModel> viewModels = [];
             foreach (var County in counties)
