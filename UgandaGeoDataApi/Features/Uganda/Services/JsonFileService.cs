@@ -73,11 +73,19 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             }
         }
 
-        public IEnumerable<SubCounty> GetSubCounties()
+        public IEnumerable<SubCounty> GetSubCounties(SubCountySearchRequest subCountySearchRequest)
         {
             using StreamReader streamReader = new(SubCountiesFileName);
             var json = streamReader.ReadToEnd();
-            return JsonSerializer.Deserialize<IEnumerable<SubCounty>>(json, Options) ?? [];
+            var subCounties = JsonSerializer.Deserialize<IEnumerable<SubCounty>>(json, Options) ?? [];
+            if (string.IsNullOrWhiteSpace(subCountySearchRequest.Name))
+            {
+                return subCounties;
+            }
+            else 
+            {
+                return subCounties.Where(it => it.Name.Contains(subCountySearchRequest.Name));
+            }
         }
 
         public IEnumerable<Parish> GetParishes()
