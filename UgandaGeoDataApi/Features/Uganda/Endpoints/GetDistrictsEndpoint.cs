@@ -13,7 +13,6 @@ namespace UgandaGeoDataApi.Features.Uganda.Endpoints
         {
             Get("/api/districts");
             AllowAnonymous();
-            ResponseCache(604800); //cache for 1 week
             Description(b => b
             .ProducesProblemDetails(400, "application/json+problem") //if using RFC errors 
             .ProducesProblemFE<InternalErrorResponse>(500));

@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services
     .AddFastEndpoints()
-    .AddResponseCaching()
     .SwaggerDocument(o =>
     {
         o.DocumentSettings = s =>
@@ -28,9 +27,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseResponseCaching() //add this before FE
-   .UseFastEndpoints();
 
 app.UseFastEndpoints()
     .UseSwaggerGen();
