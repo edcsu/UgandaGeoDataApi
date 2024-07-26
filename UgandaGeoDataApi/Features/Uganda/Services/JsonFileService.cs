@@ -54,7 +54,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             }
             else
             {
-                return districts.Where(it => it.Name.Contains(districtSearchRequest.Name));
+                return districts.Where(it => it.Name.Contains(districtSearchRequest.Name, StringComparison.OrdinalIgnoreCase));
             }
         }
 
@@ -69,7 +69,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             } 
             else 
             { 
-                return counties.Where(it => it.Name.Contains(countySearchRequest.Name));
+                return counties.Where(it => it.Name.Contains(countySearchRequest.Name, StringComparison.OrdinalIgnoreCase));
             }
         }
 
@@ -84,7 +84,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             }
             else 
             {
-                return subCounties.Where(it => it.Name.Contains(subCountySearchRequest.Name));
+                return subCounties.Where(it => it.Name.Contains(subCountySearchRequest.Name, StringComparison.OrdinalIgnoreCase));
             }
         }
 
@@ -99,7 +99,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             }
             else 
             {
-                return parishes.Where(it => it.Name.Contains(parishSearchRequest.Name));
+                return parishes.Where(it => it.Name.Contains(parishSearchRequest.Name, StringComparison.OrdinalIgnoreCase));
             }
         }
 
@@ -114,7 +114,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Services
             }
             else
             {
-                return villages.Where(it => it.Name.Contains(villageSearchRequest.Name));
+                return villages.Where(it => it.Name.Contains(villageSearchRequest.Name, StringComparison.OrdinalIgnoreCase));
             }
         }
     }
