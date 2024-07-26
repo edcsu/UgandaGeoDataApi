@@ -12,6 +12,7 @@ namespace UgandaGeoDataApi.Features.Uganda.Endpoints
         public override void Configure()
         {
             Get("/api/villages");
+            ResponseCache(604800); //cache for 1 week
             AllowAnonymous();
             Description(b => b
             .ProducesProblemDetails(400, "application/json+problem") //if using RFC errors 
